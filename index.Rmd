@@ -2,13 +2,12 @@
 output:html_document
 ---
 
-``` {r}
+```{r}
 library(tidyverse)
 library(untidydata)
 
 # these two lines are the same; you can use either or
 mtcars %>% select()
-select(mtcars)
 
 select(mtcars, mpg, hp, disp)
 
@@ -21,7 +20,6 @@ select(mtcars, hello_world = mpg)
 select(mtcars, starts_with("d"))
 
 # use to filter rows
-filter()
 
 # filter when mpy is less than 20 and greater than 14
 filter(mtcars, mpg < 20 & mpg > 14)
@@ -33,7 +31,6 @@ filter(mtcars, cyl == 6)
 filter(mtcars, mpg > 20 | disp < 200)
 
 # use mutate when you want to add a new column
-mutate()
 
 mtcars %>%
   select(mpg) %>%
@@ -46,79 +43,64 @@ mtcars %>%
 
 # if else condition if mpg is greater than 18 it is good, else
 # it is labeled bad 
+
 mtcars %>%
   select(mpg) %>%
   mutate(., value = if_else(mpg > 18, "good", "bad"))
   
 # summarize 
-summarize()
-
 
 mtcars %>%
 summarize(., mean_mpg = mean(mpg))
 
 mtcars %>%
   group_by(., cyl) %>%
-  summarize(., mean_mpg= mean(mpg))
+  summarize(., mean_mpg = mean(mpg))
 
 mtcars %>%
   group_by(., cyl) %>%
-  summarize(., mean_mpg = mean(mpg),
-            sd_mpg = sd(mpg), 
-            min_mpg = min(mpg).
-            max_mpg = max(mpg) %>%
-              
-library(tidyverse)
+  summarize(., mean_mpg = mean(mpg) , 
+            sd_mpg = sd(mpg),
+            min_mpg = min(mpg),
+            max_mpg = max(mpg))
+```
+
+``` {r}
+# data from untidydata set
 library(untidydata)
-            
-# data from untidydata set 
-            pre_post
-            
-            
 # separate into different columns 
+
 pre_post %>%
-separate(., col = spec,
-into = c( "group", "cond"), 
-sep = "_")
+  separate(., col = spec,
+           into = c( "group", "cond"), 
+           sep = "_")
             
 #unite into one column 
+
 pre_post %>% 
 unite(., col = "silly", 
 c("id", "spec"),
 sep = "_")
             
-            #pivot_longer
-            pre_post %>%
-              pivot_longer(., 
-                           cols = "test1", "test2",
-                           names_to = "test",
-                           values_to = "score") %>%
-              ggplot(., aes(x = test, y = score)) +
+#pivot_longer
+
+pre_post %>%
+  pivot_longer(., 
+               cols = "test1", "test2",
+               names_to = "test",
+               values_to = "score") %>%
+  ggplot(., aes(x = test, y = score)) +
               geom_boxplot()
             
-            #pivot_wider 
-            language_diversity %>% glimpse
+#pivot_wider 
+
+language_diversity %>% glimpse
             
-            language_diversity %>%
+language_diversity %>%
               pivot_wider(
                 id_cols = ,
                 names_from = ,
                 values_from = 
-              )
-            
-            or 
-            
-            #pivot_wider other example
-            language_diversity %>% glimpse
-            
-            language_diversity %>%
-              pivot_wider(
-                id_cols = c("Measurement", "Value") ,
-                names_from = Measurement,
-                values_from = Values
-              ) %>%
-              ggplot(., aes(x = log(Population, y= Langs)) +
-                       geom_point()
-```
-                     
+                  )
+```              
 
